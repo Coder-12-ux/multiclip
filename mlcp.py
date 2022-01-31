@@ -22,8 +22,10 @@ def get(key):
         return "INVALID KEY"
 
 
-def save(key, value):
-    cliplib[key] = value
+def save(key=None, value=None):
+    if (key != None) and (value != None):
+        cliplib[key] = value
+
     json.dump(cliplib, open("cplib.json", "w"))
 
 
@@ -34,6 +36,7 @@ if len(args) == 0:
 
 key = args[0][1:]
 
+
 if len(args) > 2:
     exit("INVALID NUMBER OF ARGUMENTS")
 
@@ -41,12 +44,15 @@ elif (len(args) == 1) and (args[0] == "lib"):
     exit(cliplib)
 
 elif (len(args) == 1) and (args[0] == "help"):
-    eixt(
+    print(
         "--------------------\n",
         "MULTICLIP aka \"mlcp\"\n",
         "--------------------\n",
         "  A utility that can store more than one\n",
         "  clipboard items at a time\n\n",
+        "  Every clipboard item has a key associated\n",
+        "  with it, which is then use to access the\n",
+        "  clip from the library\n",
         "HOW TO USE:\n",
         "  add ~(tilde) sign infront of the item's\n",
         "  key you want to get on your clipboard\n",
@@ -66,7 +72,7 @@ elif (len(args) == 1) and (args[0] == "help"):
         sep="")
 
 elif "~" in args[0]:
-    exit(get(key))
+    clipboard.copy(get(key))
     # print("getting")
 
 elif ">" in args[0]:
@@ -80,4 +86,5 @@ elif "+" in args[0]:
     save(key, clipboard.paste())
 
 elif "-" in args[0]:
-    exit(f"{cliplib.popitem(key)} deleted")
+    exit(f"\"{cliplib.pop(key)}\" deleted")
+
