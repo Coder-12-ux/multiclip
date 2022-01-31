@@ -28,19 +28,20 @@ def save(key, value):
 
 
 args = sys.argv[1:]
-key = args[0][1:]
 
 if len(args) == 0:
-    print("NO ARGUMENTS")
+    exit("NO ARGUMENTS")
 
-elif len(args) > 2:
-    print("INVALID NUMBER OF ARGUMENTS")
+key = args[0][1:]
+
+if len(args) > 2:
+    exit("INVALID NUMBER OF ARGUMENTS")
 
 elif (len(args) == 1) and (args[0] == "lib"):
-    print(cliplib)
+    exit(cliplib)
 
 elif (len(args) == 1) and (args[0] == "help"):
-    print(
+    eixt(
         "--------------------\n",
         "MULTICLIP aka \"mlcp\"\n",
         "--------------------\n",
@@ -64,13 +65,12 @@ elif (len(args) == 1) and (args[0] == "help"):
         "syntax = mlcp +<key>",
         sep="")
 
-
 elif "~" in args[0]:
-    print(get(key))
+    exit(get(key))
     # print("getting")
 
 elif ">" in args[0]:
-    print(get(key))
+    exit(get(key))
 
 elif len(args) == 2:
     key, value = args[0], args[1]
@@ -80,4 +80,4 @@ elif "+" in args[0]:
     save(key, clipboard.paste())
 
 elif "-" in args[0]:
-    print(f"{cliplib.popitem(key)} deleted")
+    exit(f"{cliplib.popitem(key)} deleted")
