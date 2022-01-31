@@ -2,7 +2,7 @@
 import json
 import clipboard
 import sys
-from os import system as cmd
+# from os import system as cmd
 
 # if key or value string has a space in them then enclose them in double quotes
 # for loading an item in clipboard, type the key<space>value
@@ -75,7 +75,7 @@ elif "~" in args[0]:
     clipboard.copy(get(key))
     # print("getting")
 
-elif ">" in args[0]:
+elif "?" in args[0]:
     exit(get(key))
 
 elif len(args) == 2:
